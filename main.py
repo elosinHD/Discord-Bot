@@ -50,6 +50,13 @@ async def check_time():
                             print(f"Error playing audio: {e}")
                     except Exception as e:
                         print(f"Error playing audio: {e}")
+                try:
+                    while voice_client.is_playing():
+                        await asyncio.sleep(1)
+                    await voice_client.disconnect()
+                    print(f"Disconnected from voice channel: {channel.name}")
+                except Exception as e:
+                    print(f"Error disconnecting from voice channel: {e}")
         await asyncio.sleep(1)  # Wait for 1 second before checking again
 
 @bot.event
